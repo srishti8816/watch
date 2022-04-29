@@ -1,0 +1,903 @@
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Watch Store</title>
+</head>
+<style>
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  font-family: "Lato", sans-serif;
+  padding: 0;
+  margin: 0;
+}
+
+nav {
+  background-color: #111;
+  color: white;
+  padding: 20px 50px;
+}
+
+.navTop {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.search {
+  display: flex;
+  align-items: center;
+  background-color: gray;
+  padding: 10px 20px;
+  border-radius: 10px;
+}
+
+.searchInput {
+  border: none;
+  background-color: transparent;
+}
+
+.searchInput::placeholder {
+  color: lightgray;
+}
+
+.limitedOffer {
+  font-size: 20px;
+  border-bottom: 2px solid green;
+  cursor: pointer;
+}
+
+.navBottom {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.menuItem {
+  margin-right: 50px;
+  cursor: pointer;
+  color: lightgray;
+  font-weight: 400;
+}
+
+.slider {
+  background: url("https://images.unsplash.com/photo-1604147495798-57beb5d6af73?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2370&q=80");
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 85%);
+  overflow: hidden;
+}
+
+.sliderWrapper {
+  display: flex;
+  width: 500vw;
+  transition: all 1.5s ease-in-out;
+}
+
+.sliderItem {
+  width: 100vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.sliderBg {
+  width: 750px;
+  height: 750px;
+  border-radius: 50%;
+  position: absolute;
+}
+
+.sliderImg {
+  z-index: 1;
+}
+
+.sliderTitle {
+  position: absolute;
+  top: 10%;
+  right: 10%;
+  font-size: 60px;
+  font-weight: 900;
+  text-align: center;
+  color: white;
+  z-index: 1;
+}
+
+.sliderPrice {
+  position: absolute;
+  top: 10%;
+  left: 10%;
+  font-size: 60px;
+  font-weight: 300;
+  text-align: center;
+  color: white;
+  border: 1px solid gray;
+  z-index: 1;
+}
+
+.sliderItem:nth-child(1) .sliderBg {
+  background-color: #369e62;
+}
+.sliderItem:nth-child(2) .sliderBg {
+  background-color: rebeccapurple;
+}
+.sliderItem:nth-child(3) .sliderBg {
+  background-color: teal;
+}
+.sliderItem:nth-child(4) .sliderBg {
+  background-color: cornflowerblue;
+}
+.sliderItem:nth-child(5) .sliderBg {
+  background-color: rgb(124, 115, 80);
+}
+
+.buyButton {
+  position: absolute;
+  top: 50%;
+  right: 10%;
+  font-size: 30px;
+  font-weight: 900;
+  color: white;
+  border: 1px solid gray;
+  background-color: black;
+  z-index: 1;
+  cursor: pointer;
+}
+
+.buyButton:hover {
+  background-color: white;
+  color: black;
+}
+
+.features {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 50px;
+}
+
+.feature {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.featureIcon {
+  width: 50px;
+  height: 50px;
+}
+
+.featureTitle {
+  font-size: 20px;
+  font-weight: 600;
+  margin: 20px;
+}
+
+.featureDesc {
+  color: gray;
+  width: 50%;
+  height: 100px;
+}
+
+.product {
+  height: 100vh;
+  background-color: whitesmoke;
+  position: relative;
+  clip-path: polygon(0 15%, 100% 0, 100% 100%, 0% 100%);
+}
+
+.payment {
+  width: 500px;
+  height: 500px;
+  background-color: white;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  padding: 10px 50px;
+  display: none;
+  flex-direction: column;
+  -webkit-box-shadow: 0px 0px 13px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 13px 2px rgba(0, 0, 0, 0.3);
+}
+
+.payTitle {
+  font-size: 20px;
+  color: lightgray;
+}
+
+label {
+  font-size: 14px;
+  font-weight: 300;
+}
+
+.payInput {
+  padding: 10px;
+  margin: 10px 0px;
+  border: none;
+  border-bottom: 1px solid gray;
+}
+
+.payInput::placeholder {
+  color: rgb(163, 163, 163);
+}
+
+.cardIcons {
+  display: flex;
+}
+
+.cardIcon {
+  margin-right: 10px;
+}
+
+.cardInfo {
+  display: flex;
+  justify-content: space-between;
+}
+
+.sm {
+  width: 30%;
+}
+
+.payButton {
+  position: absolute;
+  height: 40px;
+  bottom: -40;
+  width: 100%;
+  left: 0;
+  -webkit-box-shadow: 0px 0px 13px 2px rgba(0, 0, 0, 0.3);
+  box-shadow: 0px 0px 13px 2px rgba(0, 0, 0, 0.3);
+  background-color: #369e62;
+  color: white;
+  border: none;
+  cursor: pointer;
+}
+
+.close {
+  width: 20px;
+  height: 20px;
+  position: absolute;
+  background-color: gray;
+  color: white;
+  top: 10px;
+  right: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  padding: 2px;
+}
+
+.productImg {
+  width: 50%;
+}
+
+.productDetails {
+  position: absolute;
+  top: 10%;
+  right: 0;
+  width: 40%;
+  padding: 50px;
+}
+
+.productTitle {
+  font-size: 75px;
+  font-weight: 900;
+}
+
+.productDesc {
+  font-style: 24px;
+  color: gray;
+}
+
+.colors,
+.sizes {
+  display: flex;
+  margin-bottom: 20px;
+}
+
+.color {
+  width: 32px;
+  height: 32px;
+  border-radius: 5px;
+  background-color: black;
+  margin-right: 10px;
+  cursor: pointer;
+}
+
+
+.size {
+  padding: 5px 20px;
+  border: 1px solid black;
+  margin-right: 10px;
+  cursor: pointer;
+  font-size: 20px;
+}
+
+.productButton {
+  float: right;
+  padding: 10px 20px;
+  background-color: black;
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.productButton:hover {
+  background-color: white;
+  color: black;
+}
+
+.gallery {
+  padding: 50px;
+  display: flex;
+}
+
+.galleryItem {
+  flex: 1;
+  padding: 50px;
+}
+
+.galleryImg {
+  width: 100%;
+}
+
+.newSeason {
+  display: flex;
+}
+
+.nsItem {
+  flex: 1;
+  background-color: black;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+}
+
+.nsImg {
+  width: 100%;
+  height: 500px;
+}
+
+.nsTitle {
+  font-size: 40px;
+}
+
+.nsButton {
+  padding: 15px;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+footer {
+  display: flex;
+}
+
+.footerLeft {
+  flex: 2;
+  display: flex;
+  justify-content: space-between;
+  padding: 50px;
+}
+
+.fMenuTitle {
+  font-size: 16px;
+}
+
+.fList {
+  padding: 0;
+  list-style: none;
+}
+
+.fListItem {
+  margin-bottom: 10px;
+  color: gray;
+  cursor: pointer;
+}
+
+.footerRight {
+  flex: 1;
+  padding: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
+.fInput {
+  padding: 5px;
+}
+
+.fButton {
+  padding: 5px;
+  background-color: black;
+  color: white;
+}
+
+.fIcons{
+  display: flex;
+}
+
+.fIcon{
+  width: 20px;
+  height: 20px;
+  margin-right: 10px;
+}
+
+.copyright{
+  font-weight: 300;
+  font-size: 14px;
+}
+
+@media screen and (max-width:480px) {
+  nav{
+    padding: 20px;
+  }
+
+  .search{
+    display: none;
+  }
+
+  .navBottom{
+    flex-wrap: wrap;
+  }
+
+  .menuItem{
+    margin: 20px;
+    font-weight: 700;
+    font-size: 20px;
+  }
+
+  .slider{
+    clip-path: none;
+  }
+
+  .sliderImg{
+    width: 90%;
+  }
+
+  .sliderBg{
+    width: 100%;
+    height: 100%;
+  }
+
+  .sliderTitle{
+    display: none;
+  }
+
+  .sliderPrice{
+    top: unset;
+    bottom: -50;
+    left: 0;
+    background-color: lightgrey;
+  }
+
+  .buyButton{
+    right: 0;
+    top: 0;
+  }
+
+  .features{
+    flex-direction: column;
+  }
+
+  .product{
+    clip-path: none ;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .productImg{
+    width: 80%;
+  }
+
+  .productDetails{
+    width: 100%;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    position: relative;
+    top: 0;
+  }
+
+  .productTitle{
+    font-size: 50px;
+    margin: 0;
+  }
+
+  .gallery{
+    display: none;
+  }
+
+  .newSeason{
+    flex-direction: column;
+  }
+
+  .nsItem:nth-child(2){
+    padding: 50px;
+  }
+
+  footer{
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .footerLeft{
+    padding: 20px;
+    width: 90%;
+  }
+
+  .footerRight{
+    padding: 20px;
+    width: 90%;
+    align-items: center;
+    background-color: whitesmoke;
+  }
+
+  .payment{
+    width: 90%;
+    padding: 20px;
+  }
+}
+
+</style>
+<body>
+    <nav id="nav">
+        <div class="navTop">
+            <div class="navItem">
+				<h3>.handwatch</h3>
+            </div>
+            <div class="navItem">
+                <div class="search">
+                    <input type="text" placeholder="Search..." class="searchInput">
+                    <img src="https://cdn.icon-icons.com/icons2/2551/PNG/512/search_icon_152764.png" width="20" height="20" alt="" class="searchIcon">
+                </div>
+            </div>
+            <div class="navItem">
+                <span class="limitedOffer">Limited Offer!</span>
+            </div>
+        </div>
+        <div class="navBottom">
+            <h3 class="menuItem">TITAN</h3>
+            <h3 class="menuItem">SONATA</h3>
+            <h3 class="menuItem">ROLEX</h3>
+            <h3 class="menuItem">BOAT</h3>
+            <h3 class="menuItem">ADIDAS</h3>
+        </div>
+    </nav>
+    <div class="slider">
+        <div class="sliderWrapper">
+            <div class="sliderItem">
+                <img src="https://5.imimg.com/data5/KP/UL/KP/SELLER-4469245/titan-crystal-from-raga-facet-ladies-wrist-watch-500x500.png" 
+				alt="" class="sliderImg">
+                <div class="sliderBg"></div>
+                <h1 class="sliderTitle">TITAN</br>SEASON!!</h1>
+                <h2 class="sliderPrice">Rs.1190</h2>
+                <a href="#product">
+                    <button class="buyButton">BUY NOW!</button>
+                </a>
+            </div>
+            <div class="sliderItem">
+                <img src="https://www.mumbaionlineflorists.com/images/WACSGTT653_big.jpg" alt="" class="sliderImg">
+                <div class="sliderBg"></div>
+                <h1 class="sliderTitle">SONATA</br>SEASON!!</h1>
+                <h2 class="sliderPrice">Rs.1490</h2>
+                <a href="#product">
+                    <button class="buyButton">BUY NOW!</button>
+                </a>
+            </div>
+            <div class="sliderItem">
+                <img src="https://5.imimg.com/data5/SELLER/Default/2021/10/HZ/HK/NM/92288794/whatsapp-image-2021-10-04-at-17-47-59-1--500x500.jpeg" alt="" class="sliderImg">
+                <div class="sliderBg"></div>
+                <h1 class="sliderTitle">ROLEX</br>SEASON!!</h1>
+                <h2 class="sliderPrice">Rs.1090</h2>
+                <a href="#product">
+                    <button class="buyButton">BUY NOW!</button>
+                </a>
+            </div>
+            <div class="sliderItem">
+                <img src="https://cdn.shopify.com/s/files/1/0057/8938/4802/products/main6_2.png?v=1640628318" alt="" class="sliderImg">
+                <div class="sliderBg"></div>
+                <h1 class="sliderTitle">BOAT</br>SEASON!!</h1>
+                <h2 class="sliderPrice">Rs.1590</h2>
+                <a href="#product">
+                    <button class="buyButton">BUY NOW!</button>
+                </a>
+            </div>
+            <div class="sliderItem">
+                <img src="https://i.pinimg.com/736x/a1/fb/80/a1fb8007a33c5d28b69f784dc1b51cce--th-anniversary-gold-watches.jpg" alt="" class="sliderImg">
+                <div class="sliderBg"></div>
+                <h1 class="sliderTitle">ADIDAS</br>SEASON!!</h1>
+                <h2 class="sliderPrice">Rs.1990</h2>
+                <a href="#product">
+                    <button class="buyButton">BUY NOW!</button>
+                </a>
+            </div>
+        </div>
+    </div>
+   
+    <div class="features">
+        <div class="feature">
+            <img src="https://cdn-icons-png.flaticon.com/512/44/44279.png?w=360Fcommons%2Fthumb%2F1%2F1a%2FSocha_Bata.jpg" alt="" class="featureIcon">
+            <span class="featureTitle">FREE SHIPPING</span>
+            <span class="featureDesc">Free worldwide shipping on all orders.</span>
+        </div>
+        <div class="feature">
+            <img class="featureIcon" src="https://cdn-icons-png.flaticon.com/512/6133/6133559.png" alt="">
+            <span class="featureTitle">30 DAYS RETURN</span>
+            <span class="featureDesc">No question return and easy refund in 14 days.</span>
+        </div>
+        <div class="feature">
+            <img class="featureIcon" src="https://cdn-icons-png.flaticon.com/512/612/612886.png" alt="">
+            <span class="featureTitle">GIFT CARDS</span>
+            <span class="featureDesc">Buy gift cards and use coupon codes easily.</span>
+        </div>
+        <div class="feature">
+            <img class="featureIcon" src="data:image/png;base64,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" alt="">
+            <span class="featureTitle">CONTACT US!</span>
+            <span class="featureDesc">Keep in touch via email and support system.</span>
+        </div>
+    </div>
+
+    <div class="product" id="product">
+        <img src="https://5.imimg.com/data5/KP/UL/KP/SELLER-4469245/titan-crystal-from-raga-facet-ladies-wrist-watch-500x500.png" alt="./img/air.png" class="productImg">
+        <div class="productDetails">
+            <h1 class="productTitle">TITAN</h1>
+            <h2 class="productPrice">Rs.1990</h2>
+            <p class="productDesc">A wristwatch is worn around the wrist, most of 
+			the left hand. It is a time measuring machine. A wristwatch is easily 
+			available in different shapes and sizes. Some like around while others 
+			prefer flat wristwatches. Like all watches, a wristwatch to has a dial 
+			with numerals or dots.
+			</p>
+            
+            <button class="productButton">BUY NOW!</button>
+        </div>
+        <div class="payment">
+            <h1 class="payTitle">Personal Information</h1>
+            <label>Name and Surname</label>
+            <input type="text" placeholder="Srishti Jain" class="payInput">
+            <label>Phone Number</label>
+            <input type="text" placeholder="+91 9868XXXXXX" class="payInput">
+            <label>Address</label>
+            <input type="text" placeholder="Shahdara Delhi" class="payInput">
+            <h1 class="payTitle">Card Information</h1>
+            <div class="cardIcons">
+                <img src="https://e7.pngegg.com/pngimages/668/115/png-clipart-blue-and-yellow-visa-and-mastercard-illustration-credit-card-debit-card-computer-icons-credit-card-s-service-payment-thumbnail.png" 
+				width="40" alt="./img/visa.png" class="cardIcon">
+                <img src="https://img.favpng.com/22/9/24/mastercard-credit-card-payment-card-number-visa-logo-png-favpng-SXxgQ9GGbmEc4Gu1fGQCz0mnQ.jpg" 
+				alt="./img/master.png" width="40" class="cardIcon">
+            </div>
+            <input type="password" class="payInput" placeholder="Card Number">
+            <div class="cardInfo">
+                <input type="text" placeholder="mm" class="payInput sm">
+                <input type="text" placeholder="yyyy" class="payInput sm">
+                <input type="text" placeholder="cvv" class="payInput sm">
+            </div>
+            <button class="payButton">Checkout!</button>
+            <span class="close">X</span>
+        </div>
+    </div>
+    <div class="gallery">
+        <div class="galleryItem">
+            <h1 class="galleryTitle">Be Yourself! </h1>
+            <img src="https://prisma.watch/wp-content/uploads/2018/09/stoer-herenhorloge-bold-men-watch-prisma-refined.jpg"
+                alt="" class="galleryImg">
+        </div>
+        <div class="galleryItem">
+            <img src="https://images.unsplash.com/photo-1587925358603-c2eea5305bbc?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8d3Jpc3R3YXRjaHxlbnwwfHwwfHw%3D&w=1000&q=80"
+                alt="" class="galleryImg">
+            <h1 class="galleryTitle">This is the First Day of Your New Life</h1>
+        </div>
+        <div class="galleryItem">
+            <h1 class="galleryTitle">Be Puntual!</h1>
+            <img src="https://assets.myntassets.com/dpr_1.5,q_60,w_400,c_limit,fl_progressive/assets/images/1620103/2020/11/17/e534cf64-eb40-495e-a44f-4d6d31cced0c1605623766871-Daniel-Klein-Premium-Women-Silver-Toned-Dial-Watch-DK11138-2-1.jpg"
+                alt="" class="galleryImg">
+        </div>
+    </div>
+    <div class="newSeason">
+        <div class="nsItem">
+            <img src="https://cdn4.ethoswatches.com/the-watch-guide/wp-content/uploads/2018/03/profile_1.jpg"
+                alt="" class="nsImg">
+        </div>
+        <div class="nsItem">
+            <h3 class="nsTitleSm">NEW ARRIVALS</h3>
+            <h1 class="nsTitle">New Season</h1>
+            <h1 class="nsTitle">New Collection</h1>
+            <a href="#nav">
+                <button class="nsButton">CHOOSE YOUR STYLE</button>
+            </a>
+        </div>
+        <div class="nsItem">
+            <img src="https://media.istockphoto.com/photos/premium-mens-watch-on-hand-close-up-picture-id1065329058?k=20&m=1065329058&s=612x612&w=0&h=W2ibh4AmHRZO-T6TDgVmL79ql1iRbA1DsLka6mVX4Oc="
+                alt="" class="nsImg">
+        </div>
+    </div>
+    <footer>
+        <div class="footerLeft">
+            <div class="footerMenu">
+                <h1 class="fMenuTitle">About Us</h1>
+                <ul class="fList">
+                    <li class="fListItem">Company</li>
+                    <li class="fListItem">Contact</li>
+                    <li class="fListItem">Careers</li>
+                    <li class="fListItem">Affiliates</li>
+                    <li class="fListItem">Stores</li>
+                </ul>
+            </div>
+            <div class="footerMenu">
+                <h1 class="fMenuTitle">Useful Links</h1>
+                <ul class="fList">
+                    <li class="fListItem">Support</li>
+                    <li class="fListItem">Refund</li>
+                    <li class="fListItem">FAQ</li>
+                    <li class="fListItem">Feedback</li>
+                    <li class="fListItem">Stories</li>
+                </ul>
+            </div>
+            <div class="footerMenu">
+                <h1 class="fMenuTitle">Brands</h1>
+                <ul class="fList">
+                    <li class="fListItem">TITAN</li>
+                    <li class="fListItem">SONATA</li>
+                    <li class="fListItem">ROLEX</li>
+                    <li class="fListItem">BOAT</li>
+                    <li class="fListItem">ADIDAS</li>
+                </ul>
+            </div>
+        </div>
+        <div class="footerRight">
+            <div class="footerRightMenu">
+                <h1 class="fMenuTitle">Subscribe to our newsletter</h1>
+                <div class="fMail">
+                    <input type="text" placeholder="your@email.com" class="fInput">
+                    <button class="fButton">Join!</button>
+                </div>
+            </div>
+            <div class="footerRightMenu">
+                <h1 class="fMenuTitle">Follow Us</h1>
+                <div class="fIcons">
+                    <img src="https://cdn3.iconfinder.com/data/icons/capsocial-round/500/facebook-512.png" alt="./img/facebook.png" class="fIcon">
+                    <img src="https://cdn4.iconfinder.com/data/icons/social-media-icons-the-circle-set/48/twitter_circle-512.png" alt="./img/twitter.png" class="fIcon">
+                    <img src="https://cdn4.iconfinder.com/data/icons/social-media-2210/24/Instagram-512.png" alt="./img/instagram.png" class="fIcon">
+                    <img src="https://image.similarpng.com/very-thumbnail/2020/05/WhatsApp-icon-PNG.png" alt="./img/whatsapp.png" class="fIcon">
+                </div>
+            </div>
+            <div class="footerRightMenu">
+                <span class="copyright">@Srishti Jain...</span>
+            </div>
+        </div>
+    </footer>
+    
+	
+	
+	
+	
+<script >
+const wrapper = document.querySelector(".sliderWrapper");
+const menuItems = document.querySelectorAll(".menuItem");
+
+const products = [
+  {
+    id: 1,
+    title: "TITAN",
+    price: 1190,
+    colors: [
+      {
+        code: "black",
+        img: "https://5.imimg.com/data5/KP/UL/KP/SELLER-4469245/titan-crystal-from-raga-facet-ladies-wrist-watch-500x500.png",
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: "Sonata",
+    price: 1490,
+    colors: [
+      {
+        code: "lightgray",
+        img: "https://www.mumbaionlineflorists.com/images/WACSGTT653_big.jpg",
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: "Rolex",
+    price: 1090,
+    colors: [
+      {
+        code: "lightgray",
+        img: "https://5.imimg.com/data5/SELLER/Default/2021/10/HZ/HK/NM/92288794/whatsapp-image-2021-10-04-at-17-47-59-1--500x500.jpeg",
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: "Boat",
+    price: 1590,
+    colors: [
+      {
+        code: "black",
+        img: "https://cdn.shopify.com/s/files/1/0057/8938/4802/products/main6_2.png?v=1640628318",
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: "Adidas",
+    price: 1990,
+    colors: [
+      {
+        code: "gray",
+        img: "https://i.pinimg.com/736x/a1/fb/80/a1fb8007a33c5d28b69f784dc1b51cce--th-anniversary-gold-watches.jpg",
+      },
+    ],
+  },
+];
+
+let choosenProduct = products[0];
+
+const currentProductImg = document.querySelector(".productImg");
+const currentProductTitle = document.querySelector(".productTitle");
+const currentProductPrice = document.querySelector(".productPrice");
+const currentProductColors = document.querySelectorAll(".color");
+const currentProductSizes = document.querySelectorAll(".size");
+
+menuItems.forEach((item, index) => {
+  item.addEventListener("click", () => {
+    //change the current slide
+    wrapper.style.transform = `translateX(${-100 * index}vw)`;
+
+    //change the choosen product
+    choosenProduct = products[index];
+
+    //change texts of currentProduct
+    currentProductTitle.textContent = choosenProduct.title;
+    currentProductPrice.textContent = "Rs." + choosenProduct.price;
+    currentProductImg.src = choosenProduct.colors[0].img;
+    
+  });
+});
+
+
+currentProductSizes.forEach((size, index) => {
+  size.addEventListener("click", () => {
+    currentProductSizes.forEach((size) => {
+      size.style.backgroundColor = "white";
+      size.style.color = "black";
+    });
+    size.style.backgroundColor = "black";
+    size.style.color = "white";
+  });
+});
+
+const productButton = document.querySelector(".productButton");
+const payment = document.querySelector(".payment");
+const close = document.querySelector(".close");
+
+productButton.addEventListener("click", () => {
+  payment.style.display = "flex";
+});
+
+close.addEventListener("click", () => {
+  payment.style.display = "none";
+});
+	
+	
+	</script>
+</body>
+
+</html>
